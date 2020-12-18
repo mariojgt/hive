@@ -12,10 +12,14 @@ class HiveProvider extends ServiceProvider
      */
     public function boot()
     {
-        // load hive views
+        // Load hive views
         $this->loadViewsFrom(__DIR__.'/views', 'hive');
-        // load hive routes
+
+        // Load hive routes
         $this->loadRoutesFrom(__DIR__.'/Routes/web.php');
+
+        // Load migration
+        $this->loadMigrationsFrom(__DIR__.'/Database/Migrations');
     }
 
     /**
