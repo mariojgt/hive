@@ -15,9 +15,10 @@ class CreateInstalledPackagesTable extends Migration
     {
         Schema::create('installed_packages', function (Blueprint $table) {
             $table->id();
+            $table->string('package_name')->nullable();
             $table->string('name')->nullable();
             $table->string('version')->nullable();
-            $table->string('zip_path')->nullable();
+            $table->mediumText('update_note')->nullable();
             $table->string('github_author')->nullable();
             $table->string('github_repo')->nullable();
             $table->timestamps();
