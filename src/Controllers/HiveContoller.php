@@ -20,6 +20,7 @@ class HiveContoller extends Controller
     {
         $owner   = 'mariojgt';
         $package = 'larabit';
+
         // Ref normaly is master|main|TAG NUMBER
         $ref = 'main';
 
@@ -47,11 +48,9 @@ class HiveContoller extends Controller
         $zip = new ZipArchive;
         if ($zip->open($path) === TRUE) {
             $zip->extractTo($extractPath);
-            $zip->renameIndex(2, 'larabit');
             $zip->close();
-            echo 'ok';
         } else {
-            echo 'failed';
+            return 'Zip File missing or corrupted';
         }
 
         // Delete the original zip file
