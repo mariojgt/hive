@@ -27,6 +27,11 @@ class HiveContoller extends Controller
     {
         // Run compoer update
         $this->composerUpdate();
+        // Check if the token has been updated
+        if (config('githubToken.token') == '__TOKEN_HERE__') {
+            return false;
+            die();
+        }
         // Delte the install packages model and create again
         InstalledPackages::truncate();
         // Find the composer file
