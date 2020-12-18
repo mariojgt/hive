@@ -9,4 +9,5 @@ Route::group([
 ], function () {
     // Load flick example view
     Route::get('/hive/update', [HiveContoller::class , 'composerUpdate'])->name('hive.update');
+    Route::get('/hive/example', [HiveContoller::class , 'downloadPackage'])->name('hive.example');
 });

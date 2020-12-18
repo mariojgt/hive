@@ -34,10 +34,10 @@ class HiveProvider extends ServiceProvider
 
     public function publish()
     {
-        //publish the npm case we need to do soem developent
-        // $this->publishes([
-        //     __DIR__.'/../Publish/Npm/' => base_path()
-        // ]);
+        // Publish the config folder
+        $this->publishes([
+            __DIR__.'/../Publish/Config/' => base_path('config')
+        ]);
 
         // publish the resource in case we need to compile
         // $this->publishes([
