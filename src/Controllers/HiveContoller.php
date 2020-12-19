@@ -26,10 +26,13 @@ class HiveContoller extends Controller
     public function syncPackages()
     {
         // Run compoer update
-        $this->composerUpdate();
+        //$this->composerUpdate();
         // Check if the token has been updated
         if (config('githubToken.token') == '__TOKEN_HERE__') {
-            return false;
+            return[
+                'status' => false,
+                'ulr'    => 'https://github.com/settings/tokens'
+            ];
             die();
         }
         // Delte the install packages model and create again
@@ -69,6 +72,10 @@ class HiveContoller extends Controller
                 ]);
             }
         }
+
+        return [
+            'status' => true
+        ];
     }
 
     public function packageInfo($owner, $package)
