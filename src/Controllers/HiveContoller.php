@@ -7,29 +7,61 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Http;
 use ZipArchive;
 use Mariojgt\Hive\Models\InstalledPackages;
+use Illuminate\Support\Carbon;
+use function PHPUnit\Framework\fileExists;
 
 class HiveContoller extends Controller
 {
     protected $gitEndPoint;
+    protected $fileLog;
 
     public function __construct()
     {
         $this->gitEndPoint = 'https://api.github.com';
+        $this->fileLog     = 'console_' . Carbon::now() . '.txt';
     }
 
     public function composerUpdate()
     {
-        shell_exec("cd ../ && composer update");
+        shell_exec("cd ../ && composer update > public/console.txt");
         return 'Site Updated';
+    }
+
+    public function composerOutdated()
+    {
+        shell_exec("cd ../ && composer outdated > public/console.txt");
+        return 'Site Update checked';
+    }
+
+    public function npmOutdated()
+    {
+        shell_exec("cd ../ && npm outdated > public/console.txt");
+        return 'Site Update checked';
+    }
+
+    public function npmProd()
+    {
+        shell_exec("cd ../ && npm run prod > public/console.txt");
+        return 'Site Update checked';
+    }
+
+    public function readConsole()
+    {
+        $file = public_path('console.txt');
+        if (file_exists($file)) {
+            return nl2br(file_get_contents($file));
+        } else {
+            return '.../';
+        }
     }
 
     public function syncPackages()
     {
         // Run compoer update
-        //$this->composerUpdate();
+        $this->composerUpdate();
         // Check if the token has been updated
         if (config('githubToken.token') == '__TOKEN_HERE__') {
-            return[
+            return [
                 'status' => false,
                 'ulr'    => 'https://github.com/settings/tokens'
             ];
