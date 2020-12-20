@@ -40,9 +40,9 @@ class HiveProvider extends ServiceProvider
         ]);
 
         // publish the resource in case we need to compile
-        // $this->publishes([
-        //     __DIR__.'/../Publish/Resource/' => resource_path('vendor/Peach/')
-        // ]);
+        $this->publishes([
+            __DIR__.'/../Publish/Resource/' => resource_path('vendor/Peach/')
+        ]);
 
         // publish the public folder
         // $this->publishes([
